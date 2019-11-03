@@ -44,8 +44,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Deta Share</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/main.css" />
     <script src="./assets/js/functions.js"></script>
 </head>
 <body>
