@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if( is_uploaded_file($_FILES['file_deta']['tmp_name']) ){
         //保存先
         $filename = $_FILES['file_deta']['name'];
-        if(isExt($filename, $allowext)){
+        if(isallowExt($filename, $allowext)){
             $encpath = "./deta/".updateRandomString($filename).'.'.substr($filename, strrpos($filename, '.') + 1);
         }else{
             $encpath = "./deta/".updateRandomString($filename).'.txt';

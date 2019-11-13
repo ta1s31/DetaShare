@@ -1,6 +1,6 @@
 <?php
 
-function isExt($filename, $list) {
+function isallowExt($filename, $list) {
     $ext = substr($filename, strrpos($filename, '.') + 1);
     foreach($list as $ex) {
         if($ext === $ex){
