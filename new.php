@@ -18,11 +18,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $error = NULL;
 
     $uploadTime = date('Y-m-d H:i:s');
-    $machine = $_SERVER['HTTP_USER_AGENT'];
+    $machine = '';
     $name = $_POST['name'];
     $memo = $_POST['memo'];
     $file_path = '#';
     $allowext = ['jpeg', 'jpg', 'png', 'HEIF', 'gif', 'mov', 'mp4', 'mp3', 'aac', 'avi', 'txt', 'zip', ];
+
+    //マシン判定
+    preg_match('/Mozilla\/5\.0 \((.*); .*\) /',  $_SERVER['HTTP_USER_AGENT'], $m);
+    $machine = $m[1];
 
     //text関係処理
     if($name === ''){
