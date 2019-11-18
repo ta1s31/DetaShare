@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "NotoSans-Light";
+  src: url("./assets/font/NotoSans-unhinted/NotoSans-ExtraLight.ttf");
+}
+
+h1 {
+  font-family: '游ゴシック体';
+  font-size: 1.5em;
+}

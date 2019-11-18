@@ -45,11 +45,14 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
     <title>Deta Share</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/index.css" />
     <script src="./assets/js/functions.js"></script>
 </head>
 <body>
-    <h1>Deta Share</h1>
-    <p id="addDeta" onclick="location.href='./new.php'">データを追加</p>
+    <div class="ds_header">
+        <h1 class="header_title">Deta Share</h1>
+        <p id="addDeta" onclick="location.href='./new.php'">データを追加</p>
+    </div>
     <div class="line"></div>
     <?php if(isset($message)) : ?>
         <p class="notice"><?php echo $message; ?></p>
