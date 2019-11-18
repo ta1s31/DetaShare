@@ -1,0 +1,37 @@
+.machine {
+  font-size: 1.5em;
+  font-family: 'NotoSans-Light';
+  margin-left: 25px;
+}
+
+.card_list {
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.card {
+  height: 400px;
+  width: 350px;
+  margin: 25px;
+  display: inline-block;
+  background-color: #ffffff15;
+  
+}
+
+.card_content {
+  padding: 25px 15px;
+  height: 75%;
+}
+
+.uploadTime {
+  opacity: 0.4;
+}
+
+.deletebtn {
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+  background: #4d050593;
+  margin: 0px 50px;
+}

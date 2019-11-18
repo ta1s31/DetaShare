@@ -59,17 +59,20 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
     <?php endif; ?>
 
     <?php foreach($machines as $machine_address => $machineName) { ?>
-        <h2><?php echo h($machine_address); ?> </h2>
-        <?php foreach($machineName as $row) { ?>
-            <div class="card">
-                <div class="card_content" onclick="location.href='<?php echo h($row['path']);?>';">
-                    <p class="file_name"> <?php echo h($row['name']); ?> </p>
-                    <p class="shareText"> <?php echo h($row['memo']); ?> </p>
-                    <p class="uploadTime"> <?php echo h($row['uploadTime']); ?> </p>
+        <h2 class="machine"><?php echo h($machine_address); ?> </h2>
+        <div class="line"></div>
+        <div class="card_list">
+            <?php foreach($machineName as $row) { ?>
+                <div class="card">
+                    <div class="card_content" onclick="location.href='<?php echo h($row['path']);?>';">
+                        <p class="file_name"> <?php echo h($row['name']); ?> </p>
+                        <p class="shareText"> <?php echo h($row['memo']); ?> </p>
+                        <p class="uploadTime"> <?php echo h($row['uploadTime']); ?> </p>
+                    </div>
+                    <p class="deletebtn" onclick="execPost('./delete.php', {'id':'<?php echo $row['id'];?>'});">削除</p>
                 </div>
-                <p class="deletebtn" onclick="execPost('./delete.php', {'id':'<?php echo $row['id'];?>'});">削除</p>
-            </div>
-        <?php } ?>
+            <?php } ?>
+        </div>
         <div class="line"></div>
     <?php } ?>
     
