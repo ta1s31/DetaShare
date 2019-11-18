@@ -22,6 +22,8 @@
 .card_content {
   padding: 25px 15px;
   height: 75%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .uploadTime {
