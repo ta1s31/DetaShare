@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "NotoSans-Light";
-  src: url("./assets/font/NotoSans-unhinted/NotoSans-ExtraLight.ttf");
+  src: url("../font/NotoSans-unhinted/NotoSans-ExtraLight.ttf");
 }
 
 body {
