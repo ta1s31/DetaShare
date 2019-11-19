@@ -16,14 +16,15 @@
   margin: 25px;
   display: inline-block;
   background-color: #ffffff15;
+  word-wrap: break-word;
   
 }
 
 .card_content {
   padding: 25px 15px;
   height: 75%;
-  overflow: scroll;
-  white-space: nowrap;
+  word-wrap: break-word;
+  
 }
 
 .uploadTime {
