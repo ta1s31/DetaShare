@@ -1,5 +1,6 @@
 # DetaShare
-local machine only Data Shared Services
+ローカル端末で外部サービスを使わずデータ共有をします
+※開発途中です
 # 導入
 1. MAMP 又は XAMPP 等 webServer, php, mysqlが使える環境を用意
 1. MAMP, XAMPPの場合phpMyAdminで`DetaShare`というデータベースを作る。 要はMySQLで`DetaShare`というdb作る
