@@ -35,6 +35,65 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
 }
 
 // new deta
+    function insertDeta($pdo, $params){
+        //データ追加
+        $sql = "INSERT INTO deta (uploadTime, machine, name, memo, path) VALUES (:uploadTime, :machine, :name, :memo, :path)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+
+        header('Content-Type: text/plain; charset=UTF-8', true, 200);
+        header('Location: ./index.php');
+        exit();
+    }
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $error = NULL;
+
+        $uploadTime = date('Y-m-d H:i:s');
+        $machine = '';
+        $name = $_POST['name'];
+        $memo = $_POST['memo'];
+        $file_path = '#';
+        $allowext = ['jpeg', 'jpg', 'png', 'HEIF', 'gif', 'mov', 'mp4', 'mp3', 'aac', 'avi', 'txt', 'zip', ];
+
+        //マシン判定
+        preg_match('/Mozilla\/5\.0 \((.*); .*\) /',  $_SERVER['HTTP_USER_AGENT'], $m);
+        $machine = $m[1];
+
+        //text関係処理
+        if($name === ''){
+            $error[] = 'タイトルがありません';
+        }
+
+        //メモがurlならリンクにする
+        if(is_valid_url($memo)){
+            $file_path = $memo;
+        }
+
+        //ファイル処理
+        if( is_uploaded_file($_FILES['file_deta']['tmp_name']) ){
+            //保存先
+            $filename = $_FILES['file_deta']['name'];
+            if(isallowExt($filename, $allowext)){
+                $encpath = "./deta/".updateRandomString($filename).'.'.substr($filename, strrpos($filename, '.') + 1);
+            }else{
+                $encpath = "./deta/".updateRandomString($filename).'.txt';
+            }
+        
+            if(move_uploaded_file($_FILES['file_deta']['tmp_name'], $encpath)){
+                //正常
+                $file_path = $encpath;
+            }else{
+                $error[] = "保存に失敗しました。";
+                
+            }
+        }
+        
+        //エラーがなければデータ追加
+        if(!isset($error)){
+            insertDeta($pdo, array(':uploadTime' => $uploadTime, ':machine' => $machine, ':name' => $name, ':memo' => $memo, ':path' => $file_path));
+        }
+    }
 
 ?>
 
@@ -85,14 +144,14 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
             <div class="line"></div>
             <?php if(isset($error)) : ?>
                 <?php foreach($error as $e) { ?>
-                    <p><?php echo $e ?> </p>
+                    <p class="ds_errors"><?php echo $e ?> </p>
                 <?php } ?>
             <?php endif; ?>
             <form action="" method="POST" enctype="multipart/form-data">
                 <input type="text" name="name" placeholder="タイトル"><br>
                 <input type="text" name="memo" placeholder="コメント, メモ"><br>
                 <input type="file" name="file_deta"><br>
-                <input type="submit" value="regist"><br>
+                <input type="submit" value="追加"><br>
             </form>
         </div>
     </div>
