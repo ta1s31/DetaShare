@@ -32,8 +32,9 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
             $message = NULL;
         }
     }
-    
 }
+
+// new deta
 
 ?>
 
@@ -46,12 +47,13 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/index.css" />
-    <script src="./assets/js/functions.js"></script>
+    
 </head>
 <body>
     <div class="ds_header">
         <h1 class="header_title">Deta Share</h1>
-        <p id="addDeta" onclick="location.href='./new.php'">データを追加</p>
+        <!-- <p id="addDeta" onclick="location.href='./new.php'">データを追加</p> -->
+        <p id="addDeta">データを追加</p>
     </div>
     <div class="line"></div>
     <?php if(isset($message)) : ?>
@@ -76,7 +78,26 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
         </div>
         <div class="line"></div>
     <?php } ?>
+
+    <div class="new_deta_form">
+        <div class="new_deta_form_text">
+            <h1>データを追加</h1>
+            <div class="line"></div>
+            <?php if(isset($error)) : ?>
+                <?php foreach($error as $e) { ?>
+                    <p><?php echo $e ?> </p>
+                <?php } ?>
+            <?php endif; ?>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <input type="text" name="name" placeholder="タイトル"><br>
+                <input type="text" name="memo" placeholder="コメント, メモ"><br>
+                <input type="file" name="file_deta"><br>
+                <input type="submit" value="regist"><br>
+            </form>
+        </div>
+    </div>
     
-    
+    <script src="./assets/js/functions.js"></script>
+    <script src="./assets/js/addDeta.js"></script>
 </body>
 </html>

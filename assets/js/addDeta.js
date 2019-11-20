@@ -1,1 +1,23 @@
-const addDetaBtn = document.querySelector("#addBtn");
+//cssのvalueを取得する
+function getStyleSheetValue(element, property) {
+  if (!element || !property) {
+    return null;
+  }
+
+  var style = window.getComputedStyle(element);
+  var value = style.getPropertyValue(property);
+
+  return value;
+}
+
+const addDetaBtn = document.querySelector("#addDeta");
+var newDetaForm = document.querySelector(".new_deta_form");
+
+addDetaBtn.onclick = function() {
+  var newDetaFormDisplayStyle = getStyleSheetValue(newDetaForm, 'display');
+  if(newDetaFormDisplayStyle == "none"){
+    newDetaForm.style.display = "block";
+  }else{
+    newDetaForm.style.display = "";
+  }
+}

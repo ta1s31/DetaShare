@@ -1,3 +1,4 @@
+//postする
 function execPost(action, data) {
  // フォームの生成
  var form = document.createElement("form");

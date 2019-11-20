@@ -40,3 +40,40 @@
   background: #4d050593;
   margin: 0px 50px;
 }
+
+.new_deta_form {
+  position: fixed;
+  z-index: 999;
+  top: 25vh;
+  /* left: 25vw; */
+  display: none;
+
+  background-color: #1e1e1ef0;
+  border: 1px solid #ccc;
+  height: 40%;
+  width: 60%;
+  margin-left: 20%;
+  padding: 25px;
+}
+
+.new_deta_form_text {
+  width: 100%;
+}
+.new_deta_form_text > form {
+  margin-left: 10%;
+}
+
+.new_deta_form_text > h1 {
+  font-size: 1.5em;
+}
+
+.new_deta_form_text input[type="text"] {
+  width: 80%;
+  height: 25px;
+  margin-bottom: 15px;
+}
+
+.new_deta_form_text input[type="submit"] {
+  margin-left: 40%;
+  margin-top: 25px;
+}
