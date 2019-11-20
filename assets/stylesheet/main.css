@@ -13,8 +13,11 @@ body {
 }
 
 .line {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 15px 0px;
+}
+
+.subline {
+  padding: 5px 0px;
 }
 
 .ds_header {
@@ -33,5 +36,5 @@ body {
 }
 
 .notice {
-  
+
 }

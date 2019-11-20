@@ -66,6 +66,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
                 <div class="card">
                     <div class="card_content" onclick="location.href='<?php echo h($row['path']);?>';">
                         <p class="file_name"> <?php echo h($row['name']); ?> </p>
+                        <div class="subline"></div>
                         <p class="shareText"> <?php echo h($row['memo']); ?> </p>
                         <p class="uploadTime"> <?php echo h($row['uploadTime']); ?> </p>
                     </div>

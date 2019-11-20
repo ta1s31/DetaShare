@@ -16,15 +16,17 @@
   margin: 25px;
   display: inline-block;
   background-color: #ffffff15;
-  word-wrap: break-word;
-  
 }
 
 .card_content {
-  padding: 25px 15px;
+  padding: 25px 0px;
   height: 75%;
+  width: 80%;
+  margin: 0px auto;
+  overflow-wrap: break-word;
   word-wrap: break-word;
-  
+  /* .card_list でnowrapしているので折り返すとき必須*/
+  white-space: normal;
 }
 
 .uploadTime {
