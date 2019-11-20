@@ -33,6 +33,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $error[] = 'タイトルがありません';
     }
 
+    //メモがurlならリンクにする
+    if(is_valid_url($memo)){
+        $file_path = $memo;
+    }
+
     //ファイル処理
     if( is_uploaded_file($_FILES['file_deta']['tmp_name']) ){
         //保存先

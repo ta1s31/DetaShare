@@ -10,6 +10,11 @@ function isallowExt($filename, $list) {
     return false;
 }
 
+function is_valid_url($url)
+{
+    return false !== filter_var($url, FILTER_VALIDATE_URL) && preg_match('@^https?+://@i', $url);
+}
+
 function updateRandomString($str){
     return uniqid("DetaShare_").hash('sha256', $str);
 }
