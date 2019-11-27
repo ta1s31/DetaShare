@@ -10,14 +10,18 @@ function getStyleSheetValue(element, property) {
   return value;
 }
 
-const addDetaBtn = document.querySelector("#addDeta");
-var newDetaForm = document.querySelector(".new_deta_form");
-
-addDetaBtn.onclick = function() {
+function toggleNewDetaForm() {
+  var newDetaForm = document.querySelector(".new_deta_form");
   var newDetaFormDisplayStyle = getStyleSheetValue(newDetaForm, 'display');
+
   if(newDetaFormDisplayStyle == "none"){
     newDetaForm.style.display = "block";
   }else{
-    newDetaForm.style.display = "";
+    newDetaForm.style.display = "none";
   }
 }
+
+// const addDetaBtn = document.querySelector(".addDeta");
+// addDetaBtn.onclick = function() {
+//   toggleNewDetaForm();
+// }

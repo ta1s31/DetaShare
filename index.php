@@ -77,7 +77,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
             if(isallowExt($filename, $allowext)){
                 $encpath = "./deta/".updateRandomString($filename).'.'.substr($filename, strrpos($filename, '.') + 1);
             }else{
-                $encpath = "./deta/".updateRandomString($filename).'.txt';
+                $encpath = "./deta/".updateRandomString($filename).'-'.substr($filename, strrpos($filename, '.') + 1).'.txt';
             }
         
             if(move_uploaded_file($_FILES['file_deta']['tmp_name'], $encpath)){
@@ -111,8 +111,8 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
 <body>
     <div class="ds_header">
         <h1 class="header_title">Deta Share</h1>
-        <!-- <p id="addDeta" onclick="location.href='./new.php'">データを追加</p> -->
-        <p id="addDeta">データを追加</p>
+        <p id="addDeta" onclick="toggleNewDetaForm();">データを追加</p>
+        <!-- <p id="addDeta">データを追加</p> -->
     </div>
     <div class="line"></div>
     <?php if(isset($message)) : ?>
