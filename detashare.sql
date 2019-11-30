@@ -34,7 +34,8 @@ CREATE TABLE `deta` (
   `name` text NOT NULL,
   `path` text NOT NULL,
   `memo` text NOT NULL,
-  `machine` text NOT NULL
+  `machine` text NOT NULL,
+  `file_type` text CHARACTER SET armscii8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -55,7 +56,7 @@ ALTER TABLE `deta`
 -- AUTO_INCREMENT for table `deta`
 --
 ALTER TABLE `deta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
