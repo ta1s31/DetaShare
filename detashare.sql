@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 
--- サーバのバージョン： 10.1.32-MariaDB
--- PHP Version: 7.2.5
+-- ホスト: localhost:3306
+-- 生成日時: 2019 年 12 月 11 日 15:13
+-- サーバのバージョン： 5.7.26
+-- PHP のバージョン: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,8 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `detashare`
+-- データベース: `detashare`
 --
+CREATE DATABASE IF NOT EXISTS `detashare` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `detashare`;
 
 -- --------------------------------------------------------
 
@@ -35,29 +35,69 @@ CREATE TABLE `deta` (
   `path` text NOT NULL,
   `memo` text NOT NULL,
   `machine` text NOT NULL,
-  `file_type` text CHARACTER SET armscii8 NOT NULL
+  `filetype` text NOT NULL,
+  `user_id` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `user_id` varchar(15) NOT NULL,
+  `user_name` text NOT NULL,
+  `password` text NOT NULL,
+  `email` text NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- ダンプしたテーブルのインデックス
 --
 
 --
--- Indexes for table `deta`
+-- テーブルのインデックス `deta`
 --
 ALTER TABLE `deta`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- テーブルのインデックス `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
+-- ダンプしたテーブルのAUTO_INCREMENT
 --
 
 --
--- AUTO_INCREMENT for table `deta`
+-- テーブルのAUTO_INCREMENT `deta`
 --
 ALTER TABLE `deta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
-COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- テーブルのAUTO_INCREMENT `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- ダンプしたテーブルの制約
+--
+
+--
+-- テーブルの制約 `deta`
+--
+ALTER TABLE `deta`
+  ADD CONSTRAINT `deta_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

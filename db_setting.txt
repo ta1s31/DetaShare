@@ -1,0 +1,24 @@
+dbせっけい
+
+---- deta ----
+	id : int auto primary
+	uploadTime : date
+	name : Text
+	path : text
+	memo : text
+	machine : text
+	filetype : text
+	user_id : りれーしょん
+
+---- user ----
+	id : int auto primary
+	created_at : date
+	updated_at : date
+	user_id : varchar primary  りれーしょん
+	user_name : text
+	email : text
+	password : text
+
+
+
+
