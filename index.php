@@ -114,8 +114,6 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['addDetaStatus']) ){
     <div class="ds_header">
         <h1 class="header_title">Deta Share</h1>
         <p id="addDeta" onclick="toggleNewDetaForm();">データを追加</p>
-        <p>Sign up</p>
-        <p>Sign in</p>
         
         <!-- <p id="addDeta">データを追加</p> -->
     </div>
@@ -124,7 +122,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['addDetaStatus']) ){
         <p class="notice"><?php echo $message; ?></p>
     <?php endif; ?>
     <div class="line"></div>
-    
+
     <?php foreach($machines as $machine_address => $machineName) { ?>
         <h2 class="machine"><?php echo h($machine_address); ?> </h2>
         <div class="line"></div>

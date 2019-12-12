@@ -24,22 +24,18 @@ body {
   height: 55px;
   background-color: #1e1e1e;
   color: #fff;
+  line-height: 2em;
   padding: 15px;
 }
 .ds_header > .header_title {
   font-family: "NotoSans-Light", serif;
   font-size: 2em;
+  position: absolute;
 }
-
 .ds_header > p {
-  display: inline-block;
+  line-height: 2em;
   float: right;
-  margin: 0px 10px;
 }
-.ds_header > #addDeta {
-  
-}
-
 .notice {
   border: 2px solid #ccc;
   width: 80vw;
