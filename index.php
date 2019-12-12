@@ -37,7 +37,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
 // new deta
     function insertDeta($pdo, $params){
         //データ追加
-        $sql = "INSERT INTO deta (uploadTime, machine, name, memo, path) VALUES (:uploadTime, :machine, :name, :memo, :path)";
+        $sql = "INSERT INTO deta (uploadTime, machine, name, memo, path, filetype ) VALUES (:uploadTime, :machine, :name, :memo, :path, :filetype )";
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
 
@@ -54,7 +54,9 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
         $name = $_POST['name'];
         $memo = $_POST['memo'];
         $file_path = '#';
-        $allowext = ['jpeg', 'jpg', 'png', 'HEIF', 'gif', 'mov', 'mp4', 'mp3', 'aac', 'avi', 'txt', 'zip', ];
+        $filetype = '';
+        //$user_id = '';
+        $allowext = ['jpeg', 'jpg', 'png', 'HEIF', 'gif', 'mov', 'mp4', 'mp3', 'aac', 'avi', 'txt', 'zip'];
 
         //マシン判定
         preg_match('/Mozilla\/5\.0 \((.*); .*\) /',  $_SERVER['HTTP_USER_AGENT'], $m);
@@ -71,27 +73,32 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
         }
 
         //ファイル処理
-        if( is_uploaded_file($_FILES['file_deta']['tmp_name']) ){
-            //保存先
-            $filename = $_FILES['file_deta']['name'];
-            if(isallowExt($filename, $allowext)){
-                $encpath = "./deta/".updateRandomString($filename).'.'.substr($filename, strrpos($filename, '.') + 1);
-            }else{
-                $encpath = "./deta/".updateRandomString($filename).'-'.substr($filename, strrpos($filename, '.') + 1).'.txt';
+        try {
+            if( is_uploaded_file($_FILES['file_deta']['tmp_name']) ){
+                //保存先
+                $filename = $_FILES['file_deta']['name'];
+                if(isallowExt($filename, $allowext)){
+                    $encpath = "./deta/".updateRandomString($filename).'.'.substr($filename, strrpos($filename, '.') + 1);
+                }else{
+                    $encpath = "./deta/".updateRandomString($filename).'-'.substr($filename, strrpos($filename, '.') + 1).'.txt';
+                }
+            
+                if(move_uploaded_file($_FILES['file_deta']['tmp_name'], $encpath)){
+                    //正常
+                    $file_path = $encpath;
+                    $filetype = $_FILES['file_deta']['type'];
+                }else{
+                    $error[] = "保存に失敗しました。";
+                    
+                }
             }
-        
-            if(move_uploaded_file($_FILES['file_deta']['tmp_name'], $encpath)){
-                //正常
-                $file_path = $encpath;
-            }else{
-                $error[] = "保存に失敗しました。";
-                
-            }
+        }catch(RuntimeException $e){
+            $e->getMessage();
         }
         
         //エラーがなければデータ追加
         if(!isset($error)){
-            insertDeta($pdo, array(':uploadTime' => $uploadTime, ':machine' => $machine, ':name' => $name, ':memo' => $memo, ':path' => $file_path));
+            insertDeta($pdo, array(':uploadTime' => $uploadTime, ':machine' => $machine, ':name' => $name, ':memo' => $memo, ':path' => $file_path, ':filetype' => $filetype));
         }
     }
 

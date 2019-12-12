@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
--- ホスト: localhost:3306
--- 生成日時: 2019 年 12 月 11 日 15:13
--- サーバのバージョン： 5.7.26
--- PHP のバージョン: 7.3.8
+-- Host: 127.0.0.1
+-- Generation Time: 
+-- サーバのバージョン： 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,10 +19,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- データベース: `detashare`
+-- Database: `detashare`
 --
-CREATE DATABASE IF NOT EXISTS `detashare` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `detashare`;
 
 -- --------------------------------------------------------
 
@@ -35,8 +35,7 @@ CREATE TABLE `deta` (
   `path` text NOT NULL,
   `memo` text NOT NULL,
   `machine` text NOT NULL,
-  `filetype` text NOT NULL,
-  `user_id` varchar(15) NOT NULL
+  `filetype` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -56,48 +55,38 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- ダンプしたテーブルのインデックス
+-- Indexes for dumped tables
 --
 
 --
--- テーブルのインデックス `deta`
+-- Indexes for table `deta`
 --
 ALTER TABLE `deta`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- テーブルのインデックス `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
--- ダンプしたテーブルのAUTO_INCREMENT
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- テーブルのAUTO_INCREMENT `deta`
+-- AUTO_INCREMENT for table `deta`
 --
 ALTER TABLE `deta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- テーブルのAUTO_INCREMENT `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- ダンプしたテーブルの制約
---
-
---
--- テーブルの制約 `deta`
---
-ALTER TABLE `deta`
-  ADD CONSTRAINT `deta_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
