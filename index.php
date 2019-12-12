@@ -3,6 +3,8 @@
 require_once './lib/db.php';
 require_once "./lib/functions.php";
 
+session_start();
+
 // -- detabase -> id, uploadTime, name, path, memo, machine --
 
 //sqlですべてのデータを取得する
@@ -20,18 +22,10 @@ foreach ( $result as $machine ) {
 }
 
 $message = NULL;
-if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
-    $state = $_GET['state'];
-    if(isset($_SERVER['HTTP_REFERER'])){
-        $referer = $_SERVER['HTTP_REFERER'];
-        if( preg_match('/delete\.php/', $referer) && $state === 'deleted' ){
-            $message = "正常に削除されました";
-        }elseif( preg_match('/new\.php/', $referer) && $state === 'created' ){
-            $message = "正常に追加されました";
-        }else{
-            $message = NULL;
-        }
-    }
+if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['addDetaStatus']) ){
+    $state = $_SESSION['addDetaStatus'];
+    $message = $state;
+    unset($_SESSION['addDetaStatus']);
 }
 
 // new deta
@@ -98,6 +92,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
         
         //エラーがなければデータ追加
         if(!isset($error)){
+            $_SESSION['addDetaStatus'] = '正常に作成されました。';
             insertDeta($pdo, array(':uploadTime' => $uploadTime, ':machine' => $machine, ':name' => $name, ':memo' => $memo, ':path' => $file_path, ':filetype' => $filetype));
         }
     }
@@ -119,13 +114,17 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['state']) ){
     <div class="ds_header">
         <h1 class="header_title">Deta Share</h1>
         <p id="addDeta" onclick="toggleNewDetaForm();">データを追加</p>
+        <p>Sign up</p>
+        <p>Sign in</p>
+        
         <!-- <p id="addDeta">データを追加</p> -->
     </div>
     <div class="line"></div>
     <?php if(isset($message)) : ?>
         <p class="notice"><?php echo $message; ?></p>
     <?php endif; ?>
-
+    <div class="line"></div>
+    
     <?php foreach($machines as $machine_address => $machineName) { ?>
         <h2 class="machine"><?php echo h($machine_address); ?> </h2>
         <div class="line"></div>

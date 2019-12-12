@@ -21,7 +21,7 @@ body {
 }
 
 .ds_header {
-  height: 75px;
+  height: 55px;
   background-color: #1e1e1e;
   color: #fff;
   padding: 15px;
@@ -31,10 +31,19 @@ body {
   font-size: 2em;
 }
 
-.ds_header > #addDeta {
+.ds_header > p {
+  display: inline-block;
   float: right;
+  margin: 0px 10px;
+}
+.ds_header > #addDeta {
+  
 }
 
 .notice {
+  border: 2px solid #ccc;
+  width: 80vw;
+  margin-left: 10vw;
+  padding: 15px;
 
 }

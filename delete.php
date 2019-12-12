@@ -1,5 +1,7 @@
 <?php
     require_once "./lib/db.php";
+
+    session_start();
     
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $id = $_POST['id'];
@@ -17,9 +19,10 @@
         $sql = "DELETE FROM deta WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
+        $_SESSION['addDetaStatus'] = '正常に削除されました';
 
         header('Content-Type: text/plain; charset=UTF-8', true, 200);
-        header('Location: ./index.php?state=deleted');
+        header('Location: ./index.php');
         exit();
     }
 ?>
