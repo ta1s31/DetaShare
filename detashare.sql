@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `detashare`
 --
+CREATE DATABASE IF NOT EXISTS `detashare` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `detashare`;
 
 -- --------------------------------------------------------
 
@@ -38,21 +40,6 @@ CREATE TABLE `deta` (
   `filetype` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- テーブルの構造 `user`
---
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `user_id` varchar(15) NOT NULL,
-  `user_name` text NOT NULL,
-  `password` text NOT NULL,
-  `email` text NOT NULL,
-  `created_at` date NOT NULL,
-  `updated_at` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -65,13 +52,6 @@ ALTER TABLE `deta`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -79,13 +59,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `deta`
 --
 ALTER TABLE `deta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
