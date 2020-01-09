@@ -23,79 +23,15 @@ foreach ( $result as $machine ) {
 
 $message = NULL;
 if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['addDetaStatus']) ){
-    $state = $_SESSION['addDetaStatus'];
-    $message = $state;
+    $message = $_SESSION['addDetaStatus'];
     unset($_SESSION['addDetaStatus']);
 }
 
-// new deta
-    function insertDeta($pdo, $params){
-        //データ追加
-        $sql = "INSERT INTO deta (uploadTime, machine, name, memo, path, filetype ) VALUES (:uploadTime, :machine, :name, :memo, :path, :filetype )";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-
-        header('Content-Type: text/plain; charset=UTF-8', true, 200);
-        header('Location: ./index.php');
-        exit();
-    }
-
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $error = NULL;
-
-        $uploadTime = date('Y-m-d H:i:s');
-        $machine = '';
-        $name = $_POST['name'];
-        $memo = $_POST['memo'];
-        $file_path = '#';
-        $filetype = '';
-        //$user_id = '';
-        $allowext = ['jpeg', 'jpg', 'png', 'HEIF', 'gif', 'mov', 'mp4', 'mp3', 'aac', 'avi', 'txt', 'zip'];
-
-        //マシン判定
-        preg_match('/Mozilla\/5\.0 \((.*); .*\) /',  $_SERVER['HTTP_USER_AGENT'], $m);
-        $machine = $m[1];
-
-        //text関係処理
-        if($name === ''){
-            $error[] = 'タイトルがありません';
-        }
-
-        //メモがurlならリンクにする
-        if(is_valid_url($memo)){
-            $file_path = $memo;
-        }
-
-        //ファイル処理
-        try {
-            if( is_uploaded_file($_FILES['file_deta']['tmp_name']) ){
-                //保存先
-                $filename = $_FILES['file_deta']['name'];
-                if(isallowExt($filename, $allowext)){
-                    $encpath = "./deta/".updateRandomString($filename).'.'.substr($filename, strrpos($filename, '.') + 1);
-                }else{
-                    $encpath = "./deta/".updateRandomString($filename).'-'.substr($filename, strrpos($filename, '.') + 1).'.txt';
-                }
-            
-                if(move_uploaded_file($_FILES['file_deta']['tmp_name'], $encpath)){
-                    //正常
-                    $file_path = $encpath;
-                    $filetype = $_FILES['file_deta']['type'];
-                }else{
-                    $error[] = "保存に失敗しました。";
-                    
-                }
-            }
-        }catch(RuntimeException $e){
-            $e->getMessage();
-        }
-        
-        //エラーがなければデータ追加
-        if(!isset($error)){
-            $_SESSION['addDetaStatus'] = '正常に作成されました。';
-            insertDeta($pdo, array(':uploadTime' => $uploadTime, ':machine' => $machine, ':name' => $name, ':memo' => $memo, ':path' => $file_path, ':filetype' => $filetype));
-        }
-    }
+$validateError = NULL;
+if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['validateError']) ){
+    $validateError = $_SESSION['validateError'];
+    unset($_SESSION['validateError']);
+}
 
 ?>
 
@@ -146,16 +82,17 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['addDetaStatus']) ){
         <div class="new_deta_form_text">
             <h1>データを追加</h1>
             <div class="line"></div>
-            <?php if(isset($error)) : ?>
-                <?php foreach($error as $e) { ?>
-                    <p class="ds_errors"><?php echo $e ?> </p>
-                <?php } ?>
+            <?php if(isset($validateError)) : ?>
+                <script>toggleNewDetaForm();</script>
+                <p class="ds_errors">
+                    <?php echo h($validateError) ?>
+                </p>
             <?php endif; ?>
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="./new.php" method="POST" enctype="multipart/form-data">
                 <input type="text" name="name" placeholder="タイトル"><br>
                 <input type="text" name="memo" placeholder="コメント, メモ"><br>
                 <input type="file" name="file_deta"><br>
-                <input type="submit" value="追加"><br>
+                <input type="submit" id="addDetaBtn" value="追加"><br>
             </form>
         </div>
     </div>
