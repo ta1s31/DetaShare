@@ -55,23 +55,34 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['validateError']) ){
     </div>
     <div class="line"></div>
     <?php if(isset($message)) : ?>
-        <p class="notice"><?php echo $message; ?></p>
+        <p class="notice"><?= h($message); ?></p>
     <?php endif; ?>
     <div class="line"></div>
 
     <?php foreach($machines as $machine_address => $machineName) { ?>
-        <h2 class="machine"><?php echo h($machine_address); ?> </h2>
+        <h2 class="machine"><?= h($machine_address); ?> </h2>
         <div class="line"></div>
         <div class="card_list">
             <?php foreach($machineName as $row) { ?>
                 <div class="card">
-                    <div class="card_content" onclick="location.href='<?php echo h($row['path']);?>';">
-                        <p class="file_name"> <?php echo h($row['name']); ?> </p>
+                    <div class="card_content" onclick="location.href='<?= h($row['path']);?>';">
+                        <p class="file_name"> <?= h($row['name']); ?> </p>
                         <div class="subline"></div>
-                        <p class="shareText"> <?php echo h($row['memo']); ?> </p>
+                        <p class="shareText">
+                            <?php if(!is_valid_url($row['memo'])) {
+                                echo h($row['memo']);
+                            }else{
+                                ?><a href=<?= h($row['memo']); ?>><?= h($row['memo']) ?></a>
+                            <?php }
+                            ?>
+                        </p>
                         <p class="uploadTime"> <?php echo h($row['uploadTime']); ?> </p>
+                        <?php if(!empty($row['filetype'])) : ?>
+                            <a href="<?= h($row['path']); ?>"><img src="./assets/images/media.png " alt="media"></a>
+                        <?php endif; ?>
                     </div>
-                    <p class="deletebtn" onclick="execPost('./delete.php', {'id':'<?php echo $row['id'];?>'});">削除</p>
+                    
+                    <p class="deletebtn" onclick="execPost('./delete.php', {'id':'<?= $row['id'];?>'});">削除</p>
                 </div>
             <?php } ?>
         </div>
@@ -87,7 +98,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['validateError']) ){
                     showDetaForm();
                 }</script>
                 <p class="ds_errors">
-                    <?php echo h($validateError) ?>
+                    <?= h($validateError) ?>
                 </p>
             <?php endif; ?>
             <div class="line"></div>
@@ -100,8 +111,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['validateError']) ){
         </div>
     </div>
 
-    <div class="host_address"><?php echo h(exec("/sbin/ifconfig en0 | grep 'inet ' | cut -d ' ' -f2")); ?></div>
-    
+    <div class="host_address"><?= h(exec("/sbin/ifconfig en0 | grep 'inet ' | cut -d ' ' -f2")); ?></div>
     <script src="./assets/js/functions.js" defer></script>
     <script src="./assets/js/addDeta.js" defer></script>
 </body>
