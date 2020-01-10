@@ -50,7 +50,7 @@
 
   background-color: #1e1e1ef0;
   border: 1px solid #ccc;
-  height: 40%;
+  /* height: 40%; */
   width: 60%;
   margin-left: 20%;
   padding: 25px;
@@ -76,4 +76,21 @@
 .new_deta_form_text input[type="submit"] {
   margin-left: 40%;
   margin-top: 25px;
+}
+
+.showDetaFormBtn::before {
+  animation: fadeIn 2s ease 0s 1 normal;
+  content: '+';
+  font-size: 2em;
+}
+
+.hiddenDetaFormBtn::before {
+  animation: fadeIn 2s ease 0s 1 normal;
+  content: '-';
+  font-size: 2em;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0}
+  100% {opacity: 1}
 }

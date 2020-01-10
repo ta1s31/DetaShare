@@ -49,7 +49,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['validateError']) ){
 <body>
     <div class="ds_header">
         <h1 class="header_title">Deta Share</h1>
-        <p id="addDeta" onclick="toggleNewDetaForm();">データを追加</p>
+        <p id="addDeta" onclick="toggleNewDetaForm();" class="showDetaFormBtn"></p>
         
         <!-- <p id="addDeta">データを追加</p> -->
     </div>

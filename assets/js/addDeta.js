@@ -12,11 +12,17 @@ function getStyleSheetValue(element, property) {
 
 function showDetaForm() {
   var detaForm = document.querySelector(".new_deta_form");
+  var addBtn = document.querySelector("#addDeta");
+  addBtn.classList.toggle('showDetaFormBtn');
+  addBtn.classList.toggle('hiddenDetaFormBtn');
   detaForm.style.display = 'block';
 }
 
 function hiddenDetaForm() {
   var detaForm = document.querySelector(".new_deta_form");
+  var addBtn = document.querySelector("#addDeta");
+  addBtn.classList.toggle('showDetaFormBtn');
+  addBtn.classList.toggle('hiddenDetaFormBtn');
   detaForm.style.display = 'none';
 }
 
