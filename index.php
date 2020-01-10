@@ -16,7 +16,7 @@ $result = $machinestmt->fetchAll();
 
 $machines = array();
 foreach ( $result as $machine ) {
-    $machine_address = $machine['machine'];
+    $machine_address = $machine['machine']; //UA
     $deta_id = $machine['id'];
     $machines[$machine_address][$deta_id] = $machine;
 }
@@ -83,11 +83,14 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['validateError']) ){
             <h1>データを追加</h1>
             <div class="line"></div>
             <?php if(isset($validateError)) : ?>
-                <script>toggleNewDetaForm();</script>
+                <script>window.onload = function () {
+                    showDetaForm();
+                }</script>
                 <p class="ds_errors">
                     <?php echo h($validateError) ?>
                 </p>
             <?php endif; ?>
+            <div class="line"></div>
             <form action="./new.php" method="POST" enctype="multipart/form-data">
                 <input type="text" name="name" placeholder="タイトル"><br>
                 <input type="text" name="memo" placeholder="コメント, メモ"><br>
@@ -96,8 +99,10 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['validateError']) ){
             </form>
         </div>
     </div>
+
+    <div class="host_address"><?php echo h(exec("/sbin/ifconfig en0 | grep 'inet ' | cut -d ' ' -f2")); ?></div>
     
-    <script src="./assets/js/functions.js"></script>
-    <script src="./assets/js/addDeta.js"></script>
+    <script src="./assets/js/functions.js" defer></script>
+    <script src="./assets/js/addDeta.js" defer></script>
 </body>
 </html>

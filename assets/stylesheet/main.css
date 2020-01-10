@@ -43,3 +43,12 @@ body {
   padding: 15px;
 
 }
+
+.host_address {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+  border: solid 1px #ccc;
+  background: #000;
+}

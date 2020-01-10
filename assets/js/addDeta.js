@@ -10,15 +10,21 @@ function getStyleSheetValue(element, property) {
   return value;
 }
 
-function toggleNewDetaForm() {
-  var newDetaForm = document.querySelector(".new_deta_form");
-  var newDetaFormDisplayStyle = getStyleSheetValue(newDetaForm, 'display');
+function showDetaForm() {
+  var detaForm = document.querySelector(".new_deta_form");
+  detaForm.style.display = 'block';
+}
 
-  if(newDetaFormDisplayStyle == "none"){
-    newDetaForm.style.display = "block";
-  }else{
-    newDetaForm.style.display = "none";
-  }
+function hiddenDetaForm() {
+  var detaForm = document.querySelector(".new_deta_form");
+  detaForm.style.display = 'none';
+}
+
+function toggleNewDetaForm() {
+  var detaForm = document.querySelector(".new_deta_form");
+  var detaFormDisplayStyle = getStyleSheetValue(detaForm, 'display');
+
+  detaFormDisplayStyle == "none" ? showDetaForm() : hiddenDetaForm();
 }
 
 // const addDetaBtn = document.querySelector(".addDeta");
