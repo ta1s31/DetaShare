@@ -29,6 +29,17 @@
   white-space: normal;
 }
 
+.shareText > a{
+  color: #5f9ea0;
+  text-decoration-line: none;
+}
+.shareText > svg {
+  fill: #ccc;
+  opacity: 0.8;
+  width: 16px;
+  height: 16px;
+}
+
 .uploadTime {
   opacity: 0.4;
 }
